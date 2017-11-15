@@ -64,6 +64,7 @@ function bullet_collision()
         {
             //bullet will continue to disapear
             scene.remove(ennemy2.graphic);
+            ennemy2.dead();
             scene.remove(player1.bullets[i]);
             player1.bullets.splice(i, 1);
             i--;
