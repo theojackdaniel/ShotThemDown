@@ -14,5 +14,17 @@ function update()
         player1.decelerate(moveDistance);
 
     player1.move();
+        ennemy2.accelerate(moveDistance)
+        ennemy2.move();
+    /*else if (delta > 2 && delta < 10)
+    {
+        rotateAngle = Math.PI * delta * 2;
+        ennemy2.turnLeft(rotateAngle);
+        ennemy2.move();
+    }
+    else{
+        ennemy2.accelerate(moveDistance);
+        ennemy2.move();
+    }*/
     controls.update();
 }

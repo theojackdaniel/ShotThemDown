@@ -36,6 +36,7 @@ function collisions()
 {
     bullet_collision();
     player_collision();
+    ennemy_collision();
     player_falling();
 }
 
@@ -53,6 +54,21 @@ function bullet_collision()
         }
     }
 
+    for (var i = 0; i < player1.bullets.length; i++)
+    {
+        if ((Math.abs(player1.bullets[i].position.x) >= ennemy2.graphic.position.x - 10 &&
+            Math.abs(player1.bullets[i].position.x) <= ennemy2.graphic.position.x + 10) &&
+            (Math.abs(player1.bullets[i].position.y) >= ennemy2.graphic.position.y - 10 &&
+            Math.abs(player1.bullets[i].position.y) <= ennemy2.graphic.position.y + 10))
+        {
+            //bullet will continue to disapear
+            scene.remove(ennemy2.graphic);
+            scene.remove(player1.bullets[i]);
+            player1.bullets.splice(i, 1);
+            i--;
+        }
+    }
+
 }
 
 function player_collision()
@@ -61,12 +77,43 @@ function player_collision()
     var x = player1.graphic.position.x + WIDTH / 2;
     var y = player1.graphic.position.y + HEIGHT / 2;
 
+    if ( x < 0 )
+    player1.graphic.position.x -= x;
     if ( x > WIDTH )
         player1.graphic.position.x -= x - WIDTH;
     if ( y < 0 )
         player1.graphic.position.y -= y;
     if ( y > HEIGHT )
         player1.graphic.position.y -= y - HEIGHT;
+
+}
+
+function ennemy_collision()
+{
+    //collision between player and walls
+    var x = ennemy2.graphic.position.x + WIDTH / 2;
+    var y = ennemy2.graphic.position.y + HEIGHT / 2;
+
+    if ( x < 0 )
+    {
+        ennemy2.graphic.position.x -= x;
+        ennemy2.direction = Math.random() * 360;
+    }
+    if ( x > WIDTH )
+    {
+        ennemy2.graphic.position.x -= x - WIDTH;
+        ennemy2.direction = Math.random() * 360;
+    }
+    if ( y < 0 )
+    {
+        ennemy2.graphic.position.y -= y;
+        ennemy2.direction = Math.random() * 360;
+    }
+    if ( y > HEIGHT )
+    {
+        ennemy2.graphic.position.y -= y - HEIGHT;
+        ennemy2.direction = Math.random() * 360;
+    }
 
 }
 
