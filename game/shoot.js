@@ -37,6 +37,7 @@ function collisions()
     bullet_collision();
     player_collision();
     ennemy_collision();
+    killing_collision();
     player_falling();
 }
 
@@ -86,6 +87,19 @@ function player_collision()
     if ( y > HEIGHT )
         player1.graphic.position.y -= y - HEIGHT;
 
+}
+
+function killing_collision()
+{
+    //collision between player and walls
+    var x = player1.graphic.position.x;
+    var y = player1.graphic.position.y;
+
+    if ( x <= ennemy2.graphic.position.x + 10 &&
+        x >= ennemy2.graphic.position.x - 10 &&
+        y <= ennemy2.graphic.position.y + 10 &&
+        y >= ennemy2.graphic.position.y - 10)
+        player1.dead();
 }
 
 function ennemy_collision()
